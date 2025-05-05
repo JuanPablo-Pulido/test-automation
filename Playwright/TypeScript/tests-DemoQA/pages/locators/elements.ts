@@ -34,10 +34,9 @@ export const elementsLocators={
     profile: "//span[@class='text'][text()='Profile']",
     bookStoreAPI: "//span[@class='text'][text()='Book Store API']",
 
-    textBoxButton: "//span[@class='text'][text()='Text Box']",
-    ChecktBoxButton: "//span[@class='text'][text()='Check Box']",
-    textBoxText: "//h1[@class='text-center']",
-    checkBoxText: "//h1[@class='text-center']",
+
+    h1Text: "//h1[@class='text-center']",
+    
 
     fullNameInput: "//input[@id='userName']",
     EmailInput: "//input[@id='userEmail']",
@@ -58,7 +57,23 @@ export const elementsLocators={
     downloadsButton: "//label[@for='tree-node-downloads']",
     homeText: "#result",
     toogleHome: "//button[@aria-label='Toggle']",
+    //Radio Button Screen
 
+    yesButton: "//label[@for='yesRadio']",
+    impressiveButton: "//label[@for='impressiveRadio']",
+    radioButtonText: "//span[@class='text-success']",
+    nosButton: "//label[@for='noRadio']",
     
-   
+    //Web tables Screen
+
+    addButton: "#addNewRecordButton",
+    firstNameInput: "#firstName",
+    lastNameInput: "#lastName",
+    emailInput: "#userEmail",
+    ageInput: "#age",
+    salaryInput: "#salary",
+    departmentInput: "#department",
+    form: "#userForm",
+    errorClassForm: "was-validated"
+    
 }

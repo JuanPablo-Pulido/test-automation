@@ -41,7 +41,7 @@ test.describe.serial('Test Suite Elements Screen',()=>{
         await elementsPage.validateEmailShield(userData.name,userData.email,userData.current_address,userData.permanent_address);
         });
     });
-    test.describe.serial('Validate CheckBox Screen', ()=>{
+    test.describe('Validate CheckBox Screen', ()=>{
         let base: BasePage;
         let elementsPage: ElementsPage;
         test.beforeEach(async({page})=>{
@@ -57,5 +57,40 @@ test.describe.serial('Test Suite Elements Screen',()=>{
 
         });
     });
-
+    test.describe('Validate Radio Button Screen', ()=>{
+        let base: BasePage;
+        let elementsPage: ElementsPage;
+        test.beforeEach(async({page})=>{
+        base = new BasePage(page);
+        elementsPage = new ElementsPage(page);
+        await elementsPage.goToRadioButtonScreen();
+        });
+        test('validate Radio Button', async()=>{
+            await elementsPage.yesButton();
+            await elementsPage.noButton();
+            await elementsPage.impressiveButton();
+            await elementsPage.noButton();   
+        });
+    });
+    test.describe('Validate Web Tables Screen', ()=>{
+        let base: BasePage;
+        let elementsPage: ElementsPage;
+        test.beforeEach(async({page})=>{
+        base = new BasePage(page);
+        elementsPage = new ElementsPage(page);
+        await elementsPage.goToWebTablesScreen();
+        });
+        test('Validate inputs when u add new row',async()=>{
+        await elementsPage.addNewRow();
+        await elementsPage.validateFirstNameInput();
+        await elementsPage.validateLastNameInput();
+        await elementsPage.validateEmailInput();
+        await elementsPage.validateAgeInput();
+        await elementsPage.validateSalaryInput();
+        await elementsPage.validateDepartmanentInput();
+        });
+    });
+   
+    
+    
 });

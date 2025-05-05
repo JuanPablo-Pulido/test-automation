@@ -1,3 +1,4 @@
+import { log } from "console";
 import { BasePage } from "./basePage";
 import { elementsLocators } from "./locators/elements";
 import {Page, Locator} from '@playwright/test';
@@ -48,15 +49,28 @@ export class ElementsPage extends BasePage{
     async goToTextBoxScreen(){
         await this.loadWeb('https://demoqa.com/');
         await this.clickOn(elementsLocators.elements);
-        await this.clickOn(elementsLocators.textBoxButton);
-        await this.validateText(elementsLocators.textBoxText,"Text Box");
+        await this.clickOn(elementsLocators.textBox);
+        await this.validateText(elementsLocators.h1Text,"Text Box");
     }
 
     async goToCheckBoxScreen(){
         await this.loadWeb('https://demoqa.com/');
         await this.clickOn(elementsLocators.elements);
-        await this.clickOn(elementsLocators.ChecktBoxButton);
-        await this.validateText(elementsLocators.checkBoxText,"Check Box");
+        await this.clickOn(elementsLocators.checkBox);
+        await this.validateText(elementsLocators.h1Text,"Check Box");
+    }
+
+    async goToRadioButtonScreen(){
+        await this.loadWeb('https://demoqa.com/');
+        await this.clickOn(elementsLocators.elements);
+        await this.clickOn(elementsLocators.radioButton);
+        await this.validateText(elementsLocators.h1Text,"Radio Button");
+    }
+    async goToWebTablesScreen(){
+        await this.loadWeb('https://demoqa.com/');
+        await this.clickOn(elementsLocators.elements);
+        await this.clickOn(elementsLocators.webTables);
+        await this.validateText(elementsLocators.h1Text,"Web Tables");
     }
 
 
@@ -113,5 +127,159 @@ export class ElementsPage extends BasePage{
         await this.validateText(elementsLocators.homeText,"You have selected :documentsworkspacereactangularveuofficepublicprivateclassifiedgeneral");
         await this.clickOn(elementsLocators.documentsButton);
         await this.expectHidden(elementsLocators.homeText);
+    }
+
+    async yesButton(){
+        await this.clickOn(elementsLocators.yesButton);
+        await this.validateText(elementsLocators.radioButtonText,"Yes")
+    }
+
+    async impressiveButton(){
+        await this.clickOn(elementsLocators.impressiveButton);
+        await this.validateText(elementsLocators.radioButtonText,"Impressive")
+    }
+
+    async noButton(){
+        await this.elementDisabled(elementsLocators.nosButton)
+    }
+
+    //Web Tables Methods
+    async addNewRow(){
+        await this.clickOn(elementsLocators.addButton);
+        await this.fillShield(elementsLocators.firstNameInput,"Juan");
+        await this.fillShield(elementsLocators.lastNameInput,"Test");
+        await this.fillShield(elementsLocators.emailInput,"test@automation.com");
+        await this.fillShield(elementsLocators.ageInput,"12");
+        await this.fillShield(elementsLocators.salaryInput,"1312312");
+        await this.fillShield(elementsLocators.departmentInput,"IT");
+        await this.clickOn(elementsLocators.submitButton);
+    }
+
+    async validateFirstNameInput(){
+        await this.clickOn(elementsLocators.addButton);
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.lastNameInput,"Test");
+        await this.fillShield(elementsLocators.emailInput,"test@automation.com");
+        await this.fillShield(elementsLocators.ageInput,"12");
+        await this.fillShield(elementsLocators.salaryInput,"1312312");
+        await this.fillShield(elementsLocators.departmentInput,"IT");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.firstNameInput,"Juan");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.expectHidden(elementsLocators.errorClassForm);
+
+    }
+
+    async validateLastNameInput(){
+        await this.clickOn(elementsLocators.addButton);
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.firstNameInput,"Juan");
+        await this.fillShield(elementsLocators.emailInput,"test@automation.com");
+        await this.fillShield(elementsLocators.ageInput,"12");
+        await this.fillShield(elementsLocators.salaryInput,"1312312");
+        await this.fillShield(elementsLocators.departmentInput,"IT");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.lastNameInput,"Test");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.expectHidden(elementsLocators.errorClassForm);
+
+    }
+
+    async validateEmailInput(){
+        await this.clickOn(elementsLocators.addButton);
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.firstNameInput,"Juan");
+        await this.fillShield(elementsLocators.lastNameInput,"Test");
+        await this.fillShield(elementsLocators.ageInput,"12");
+        await this.fillShield(elementsLocators.salaryInput,"1312312");
+        await this.fillShield(elementsLocators.departmentInput,"IT");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.emailInput,"juan");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.emailInput,"juan@");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.emailInput,"juan@test");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.emailInput,"juan@test,com");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.emailInput,"juan@test.com");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.expectHidden(elementsLocators.errorClassForm);
+    }
+
+    async validateAgeInput(){
+        await this.clickOn(elementsLocators.addButton);
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.firstNameInput,"Juan");
+        await this.fillShield(elementsLocators.lastNameInput,"Test");
+        await this.fillShield(elementsLocators.emailInput,"test@automation.com");
+        await this.fillShield(elementsLocators.salaryInput,"1312312");
+        await this.fillShield(elementsLocators.departmentInput,"IT");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.ageInput,"a");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.ageInput,"1,1");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.ageInput,"@");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.ageInput,"1");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.expectHidden(elementsLocators.errorClassForm);
+        }
+
+        async validateSalaryInput(){
+            await this.clickOn(elementsLocators.addButton);
+            await this.clickOn(elementsLocators.submitButton);
+            await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+            await this.fillShield(elementsLocators.firstNameInput,"Juan");
+            await this.fillShield(elementsLocators.lastNameInput,"Test");
+            await this.fillShield(elementsLocators.emailInput,"test@automation.com");
+            await this.fillShield(elementsLocators.ageInput,"12");
+            await this.fillShield(elementsLocators.departmentInput,"IT");
+            await this.clickOn(elementsLocators.submitButton);
+            await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+            await this.fillShield(elementsLocators.salaryInput,"a");
+            await this.clickOn(elementsLocators.submitButton);
+            await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+            await this.fillShield(elementsLocators.salaryInput,"1,1");
+            await this.clickOn(elementsLocators.submitButton);
+            await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+            await this.fillShield(elementsLocators.salaryInput,"@");
+            await this.clickOn(elementsLocators.submitButton);
+            await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+            await this.fillShield(elementsLocators.salaryInput,"1");
+            await this.clickOn(elementsLocators.submitButton);
+            await this.expectHidden(elementsLocators.errorClassForm);
+            }
+
+    async validateDepartmanentInput(){
+        await this.clickOn(elementsLocators.addButton);
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.firstNameInput,"Juan");
+        await this.fillShield(elementsLocators.lastNameInput,"test");
+        await this.fillShield(elementsLocators.emailInput,"test@automation.com");
+        await this.fillShield(elementsLocators.ageInput,"12");
+        await this.fillShield(elementsLocators.salaryInput,"1312312");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.validateClass(elementsLocators.form,elementsLocators.errorClassForm);
+        await this.fillShield(elementsLocators.departmentInput,"Test");
+        await this.clickOn(elementsLocators.submitButton);
+        await this.expectHidden(elementsLocators.errorClassForm);
     }
 }

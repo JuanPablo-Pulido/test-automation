@@ -51,4 +51,12 @@ export class BasePage{
 
     }
 
+    async elementDisabled(selector: string){
+        await expect(this.page.locator(selector)).toBeDisabled();
+    }
+
+    async countElements(selector:string){
+        await this.page.locator(selector).count()
+    }
+
 }

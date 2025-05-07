@@ -1,11 +1,13 @@
-import { Page, expect } from "@playwright/test";
+import { BrowserContext, Page, expect } from "@playwright/test";
 
 export class BasePage{
 
     protected readonly page: Page;
+    protected readonly context?: BrowserContext;
 
-    constructor(page: Page){
+    constructor(page: Page, context?:BrowserContext ){
         this.page=page;
+        this.context=context;
 
     }
 
@@ -15,6 +17,12 @@ export class BasePage{
 
     async clickOn(selector:string){ 
         await this.page.click(selector);
+    }
+    async doubleClick(selector:string){
+        await this.page.dblclick(selector);
+    }
+    async rightClick(selector:string){
+        await this.page.locator(selector).click({ button: 'right' });
     }
     async fillShield(selector:string, value: string){
         await this.page.locator(selector).fill(value)
@@ -28,8 +36,8 @@ export class BasePage{
         await expect(this.page.locator(selector)).toBeHidden();
     }
 
-    async validateTitle(title:string){
-        await expect(this.page).toHaveTitle(title);
+    async validateTitle(c_page:Page,title:string){
+        await expect(c_page).toHaveTitle(title);
     }
 
     async validateText(selector:string, message: string){
@@ -59,4 +67,22 @@ export class BasePage{
         await this.page.locator(selector).count()
     }
 
-}
+    async validateNewContextClick(selector: string, expectedUrl:string){
+        if (!this.context) {
+            throw new Error("Contexto no definido en BasePage");
+        }
+        const [newPage]= await Promise.all([
+            this.context.waitForEvent('page'),
+            this.clickOn(selector)]);
+        await newPage.waitForLoadState();
+        await expect(newPage).toHaveURL(expectedUrl);
+
+        return newPage;
+
+    };
+    
+    async compareText(firstText,secondText){
+        expect(firstText===secondText)
+    }
+
+};

@@ -74,6 +74,29 @@ export const elementsLocators={
     salaryInput: "#salary",
     departmentInput: "#department",
     form: "#userForm",
-    errorClassForm: "was-validated"
+    errorClassForm: "was-validated",
     
+    //buttons Screen
+
+    doubleClickButton: "#doubleClickBtn",
+    rightClickButton: "#rightClickBtn",
+    clickMeButton: "//button[text()='Click Me']",
+    messageDoubleClick: "#doubleClickMessage",
+    messageRightClick: "#rightClickMessage",
+    messageClick: "#dynamicClickMessage",
+
+    //links Screen
+
+    homeLink: "#simpleLink",
+    homeodbqD: "#dynamicLink",
+    created: "#created",
+    noContent: "#no-content",
+    moved: "#moved",
+    badRequest: "#bad-request",
+    unauthorized: "#unauthorized",
+    forbidden: "#forbidden",
+    notFound: "#invalid-url",
+
+    responseText: "#linkResponse",
+
 }

@@ -1,12 +1,12 @@
 import { log } from "console";
 import { BasePage } from "./basePage";
 import { elementsLocators } from "./locators/elements";
-import {Page, Locator} from '@playwright/test';
+import {Page, Locator, BrowserContext, expect} from '@playwright/test';
 
 export class ElementsPage extends BasePage{
      
-    constructor(page: Page){
-        super(page);
+    constructor(page: Page, context?: BrowserContext){
+        super(page, context);
     }
 
     async reviewElementsTools(){
@@ -72,7 +72,20 @@ export class ElementsPage extends BasePage{
         await this.clickOn(elementsLocators.webTables);
         await this.validateText(elementsLocators.h1Text,"Web Tables");
     }
+    async goButtonsScreen(){
+        await this.loadWeb('https://demoqa.com/');
+        await this.clickOn(elementsLocators.elements);
+        await this.clickOn(elementsLocators.buttons);
+        await this.validateText(elementsLocators.h1Text,"Buttons");
+    }
 
+    async goToLinksScreen(){
+        await this.loadWeb('https://demoqa.com/');
+        await this.clickOn(elementsLocators.elements);
+        await this.clickOn(elementsLocators.links);
+        await this.validateText(elementsLocators.h1Text,"Links");
+
+    }
 
     async validateInputs(name:string,email:string,address:string, permanentAddrees:string){
         await this.fillShield(elementsLocators.fullNameInput,name);
@@ -282,4 +295,66 @@ export class ElementsPage extends BasePage{
         await this.clickOn(elementsLocators.submitButton);
         await this.expectHidden(elementsLocators.errorClassForm);
     }
+
+    //Butttons Methods
+
+    async doubleClickMe(){
+        await this.expectHidden(elementsLocators.messageDoubleClick);
+        await this.doubleClick(elementsLocators.doubleClickButton);
+        await this.expectVisible(elementsLocators.messageDoubleClick);
+        await this.validateText(elementsLocators.messageDoubleClick,"You have done a double click");
+    }
+    async rightClickMe(){
+        await this.expectHidden(elementsLocators.messageRightClick);
+        await this.rightClick(elementsLocators.rightClickButton);
+        await this.expectVisible(elementsLocators.messageRightClick);
+        await this.validateText(elementsLocators.messageRightClick,"You have done a right click");
+    }
+    async clickMe(){
+        await this.expectHidden(elementsLocators.messageClick);
+        await this.clickOn(elementsLocators.clickMeButton);
+        await this.expectVisible(elementsLocators.messageClick);
+        await this.validateText(elementsLocators.messageClick,"You have done a dynamic click");
+    }
+    async validateContextLinks(){
+        const newPage=(await this.validateNewContextClick(elementsLocators.homeLink,"https://demoqa.com/"));
+        await this.validateTitle(newPage,"DEMOQA");
+        const thirdPage=(await this.validateNewContextClick(elementsLocators.homeodbqD,"https://demoqa.com/"));
+        await this.validateTitle(thirdPage,"DEMOQA");
+        await this.clickOn(elementsLocators.created);
+        await this.validateText(elementsLocators.responseText,"Link has responded with staus 201 and status text Created");
+
+    }
+
+    async validateCreatedLink(){
+        await this.clickOn(elementsLocators.created);
+        await this.validateText(elementsLocators.responseText,"Link has responded with staus 201 and status text Created");
+    }
+    async validateNoContentLink(){
+        await this.clickOn(elementsLocators.noContent);
+        await this.validateText(elementsLocators.responseText,"Link has responded with staus 204 and status text No Content");
+    }
+    
+    async validateBadRequestLink(){
+        await this.clickOn(elementsLocators.badRequest);
+        await this.validateText(elementsLocators.responseText,"Link has responded with staus 400 and status text Bad Request");
+    }
+    async validateMovedLink(){
+        await this.clickOn(elementsLocators.moved);
+        await this.validateText(elementsLocators.responseText,"Link has responded with staus 301 and status text Moved Permanently");
+    }
+    async validateForbiddenLink(){
+        await this.clickOn(elementsLocators.forbidden);
+        await this.validateText(elementsLocators.responseText,"Link has responded with staus 403 and status text Forbidden");
+    }
+    async validateUnauthorizedLink(){
+        await this.clickOn(elementsLocators.unauthorized);
+        await this.validateText(elementsLocators.responseText,"Link has responded with staus 401 and status text Unauthorized");
+    }
+    async validateNotFoundLink(){
+        await this.clickOn(elementsLocators.notFound);
+        await this.validateText(elementsLocators.responseText,"Link has responded with staus 404 and status text Not Found");
+    }
+
+    
 }

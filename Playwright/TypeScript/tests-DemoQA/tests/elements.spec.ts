@@ -14,7 +14,7 @@ test.describe.serial('Test Suite Elements Screen',()=>{
         //Go to the page
         await base.loadWeb('https://demoqa.com/');
         //Expect the title name
-        await base.validateTitle("DEMOQA");
+        await base.validateTitle(page,"DEMOQA");
         //Select Elements button
         await base.clickOn(elementsLocators.elements);
         //Validate elements section
@@ -91,6 +91,41 @@ test.describe.serial('Test Suite Elements Screen',()=>{
         });
     });
    
-    
+    test.describe('Validate buttons Screen', ()=>{
+        let base: BasePage;
+        let elementsPage: ElementsPage;
+        test.beforeEach(async({page})=>{
+        base = new BasePage(page);
+        elementsPage = new ElementsPage(page);
+        await elementsPage.goButtonsScreen();
+        });
+        test('Validate buttons and their messages',async()=>{
+        await elementsPage.rightClickMe();
+        await elementsPage.doubleClickMe();
+        await elementsPage.clickMe();
+        });
+    });
+
+    test.describe('Validate links screen', ()=>{
+        let base: BasePage;
+        let elementsPage: ElementsPage;
+        test.beforeEach(async({page, context})=>{
+            base = new BasePage(page);
+            elementsPage = new ElementsPage(page, context);
+            await elementsPage.goToLinksScreen();
+            });
+            test('Validate each link',async()=>{
+            await elementsPage.validateContextLinks();
+            await elementsPage.validateCreatedLink();
+            await elementsPage.validateNoContentLink();
+            await elementsPage.validateMovedLink();
+            await elementsPage.validateBadRequestLink();
+            await elementsPage.validateBadRequestLink();
+            await elementsPage.validateUnauthorizedLink();
+            await elementsPage.validateForbiddenLink();
+            await elementsPage.validateNotFoundLink();
+            
+            });
+    })
     
 });

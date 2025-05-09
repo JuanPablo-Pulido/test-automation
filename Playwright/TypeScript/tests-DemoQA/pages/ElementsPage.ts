@@ -2,6 +2,7 @@ import { log } from "console";
 import { BasePage } from "./basePage";
 import { elementsLocators } from "./locators/elements";
 import {Page, Locator, BrowserContext, expect} from '@playwright/test';
+import path from "path";
 
 export class ElementsPage extends BasePage{
      
@@ -86,7 +87,20 @@ export class ElementsPage extends BasePage{
         await this.validateText(elementsLocators.h1Text,"Links");
 
     }
+    async goToDynamicScreen(){
+        await this.loadWeb('https://demoqa.com/');
+        await this.clickOn(elementsLocators.elements);
+        await this.clickOn(elementsLocators.dynamicProperties);
+        await this.validateText(elementsLocators.h1Text,"Dynamic Properties");
 
+    }
+    async goToUploadScreen(){
+        await this.loadWeb('https://demoqa.com/');
+        await this.clickOn(elementsLocators.elements);
+        await this.clickOn(elementsLocators.uploadDownload);
+        await this.validateText(elementsLocators.h1Text,"Upload and Download");
+
+    }
     async validateInputs(name:string,email:string,address:string, permanentAddrees:string){
         await this.fillShield(elementsLocators.fullNameInput,name);
         await this.fillShield(elementsLocators.EmailInput,email);
@@ -316,6 +330,8 @@ export class ElementsPage extends BasePage{
         await this.expectVisible(elementsLocators.messageClick);
         await this.validateText(elementsLocators.messageClick,"You have done a dynamic click");
     }
+
+    //Links Screen methods
     async validateContextLinks(){
         const newPage=(await this.validateNewContextClick(elementsLocators.homeLink,"https://demoqa.com/"));
         await this.validateTitle(newPage,"DEMOQA");
@@ -354,6 +370,44 @@ export class ElementsPage extends BasePage{
     async validateNotFoundLink(){
         await this.clickOn(elementsLocators.notFound);
         await this.validateText(elementsLocators.responseText,"Link has responded with staus 404 and status text Not Found");
+    }
+
+    //Dynamic properties screes methods
+
+    async validateDynamicId(){
+        const first_id= await this.getAttribute(elementsLocators.dynamicId,'id');
+        console.log(first_id);
+        await this.page.reload()
+        const next_id=await this.getAttribute(elementsLocators.dynamicId,'id');
+        console.log(next_id)
+        expect(first_id).not.toBe(next_id);
+    }
+    async validateEnabledButton(){
+        this.elementDisabled(elementsLocators.enabledButtton);
+        await this.page.waitForTimeout(5000)
+        this.elementEnabled(elementsLocators.enabledButtton);
+    }
+
+    async validateVisibleButton(){
+        this.expectHidden(elementsLocators.visibleButton);
+        await this.page.waitForTimeout(5000);
+        this.expectVisible(elementsLocators.visibleButton);
+    }
+
+    //Upload and Download
+
+    async validateUploadFile(){
+        const file_path=path.resolve(__dirname,"../data/sampleFile.jpeg")
+        await this.UploadFile(elementsLocators.UploadButton,file_path);
+        await this.validateText(elementsLocators.textUpload,'C:\\fakepath\\sampleFile.jpeg')
+    }
+
+    async validateDownloadFile(){
+        await this.page.pause()
+        const file_path=path.resolve(__dirname,"../downloads/sampleFile.jpeg");
+        await this.downloadFile(elementsLocators.DownloadButton,file_path);
+
+
     }
 
     

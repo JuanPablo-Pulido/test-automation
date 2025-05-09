@@ -62,6 +62,9 @@ export class BasePage{
     async elementDisabled(selector: string){
         await expect(this.page.locator(selector)).toBeDisabled();
     }
+    async elementEnabled(selector: string){
+        await expect(this.page.locator(selector)).toBeEnabled();
+    }
 
     async countElements(selector:string){
         await this.page.locator(selector).count()
@@ -81,8 +84,25 @@ export class BasePage{
 
     };
     
-    async compareText(firstText,secondText){
-        expect(firstText===secondText)
+    async getAttribute(selector: string, attribute:string){
+        const getted_attribute= await this.page.locator(selector).getAttribute(attribute)
+        return getted_attribute
     }
 
+    async reloadPage(){
+        await this.page.reload();
+    }
+
+    async UploadFile(selector: string, path: string){
+        await this.page.locator(selector).setInputFiles(path);
+    }
+    
+    async downloadFile(selector: string, path: string) {
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'), 
+            this.clickOn(selector)
+        ]);
+        await download.saveAs(path);
+        expect(await download.path()).not.toBeNull();
+    }
 };

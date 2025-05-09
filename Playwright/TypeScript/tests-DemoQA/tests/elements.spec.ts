@@ -126,6 +126,37 @@ test.describe.serial('Test Suite Elements Screen',()=>{
             await elementsPage.validateNotFoundLink();
             
             });
+    test.describe('Validate Dynamic porperties screen', ()=>{
+        let base: BasePage;
+        let elementsPage: ElementsPage;
+        test.beforeEach(async({page})=>{
+            base = new BasePage(page);
+            elementsPage = new ElementsPage(page);
+            await elementsPage.goToDynamicScreen();
+            });
+            test('Validate dynamic buttons', async()=>{
+                await elementsPage.validateDynamicId();
+                await base.reloadPage();
+                await elementsPage.validateEnabledButton();
+                await base.reloadPage();
+                await elementsPage.validateVisibleButton();
+
+            })
+        
+    });
+    test.describe.only('Validate Upload and Download screen', ()=>{
+        let base: BasePage;
+        let elementsPage: ElementsPage;
+        test.beforeEach(async({page})=>{
+            base = new BasePage(page);
+            elementsPage = new ElementsPage(page);
+            await elementsPage.goToUploadScreen();
+            });
+            test('Validate upload and Download Button', async()=>{
+                await elementsPage.validateUploadFile();
+                await elementsPage.validateDownloadFile();
+            })
+        
+    });
     })
-    
 });

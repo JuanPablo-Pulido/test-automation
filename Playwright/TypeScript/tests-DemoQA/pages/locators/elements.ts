@@ -98,5 +98,16 @@ export const elementsLocators={
     notFound: "#invalid-url",
 
     responseText: "#linkResponse",
+    
+    //Dynamic porperties
+
+    dynamicId: "//p[text()='This text has random Id']",
+    enabledButtton: "#enableAfter",
+    visibleButton: "#visibleAfter",
+
+    UploadButton: "//input[@type='file']",
+    textUpload: "#uploadedFilePath",
+    DownloadButton: "#downloadButton",
+
 
 }

@@ -18,6 +18,13 @@ export class BasePage{
     async clickOn(selector:string){ 
         await this.page.click(selector);
     }
+
+    async checkOption(selector:string){
+        await this.page.check(selector);
+    }
+    async selectOption(selector:string,value:string){
+        await this.page.locator(selector).selectOption(value);
+    }
     async doubleClick(selector:string){
         await this.page.dblclick(selector);
     }
@@ -38,6 +45,10 @@ export class BasePage{
 
     async validateTitle(c_page:Page,title:string){
         await expect(c_page).toHaveTitle(title);
+    }
+
+    async validateURL(url: string){
+        await expect(this.page).toHaveURL(url)
     }
 
     async validateText(selector:string, message: string){
@@ -104,5 +115,10 @@ export class BasePage{
         ]);
         await download.saveAs(path);
         expect(await download.path()).not.toBeNull();
+    }
+
+    async clickByText(text:string){
+        await this.page.getByText(text, {exact: true}).click();
+
     }
 };

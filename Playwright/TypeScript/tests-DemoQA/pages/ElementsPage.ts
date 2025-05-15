@@ -403,7 +403,6 @@ export class ElementsPage extends BasePage{
     }
 
     async validateDownloadFile(){
-        await this.page.pause()
         const file_path=path.resolve(__dirname,"../downloads/sampleFile.jpeg");
         await this.downloadFile(elementsLocators.DownloadButton,file_path);
 

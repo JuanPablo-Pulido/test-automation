@@ -144,7 +144,7 @@ test.describe.serial('Test Suite Elements Screen',()=>{
             })
         
     });
-    test.describe.only('Validate Upload and Download screen', ()=>{
+    test.describe('Validate Upload and Download screen', ()=>{
         let base: BasePage;
         let elementsPage: ElementsPage;
         test.beforeEach(async({page})=>{

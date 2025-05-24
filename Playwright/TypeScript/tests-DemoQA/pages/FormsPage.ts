@@ -31,8 +31,8 @@ export class FormsPage extends BasePage{
     async goToPracticeForm(){
         try{
             await this.clickOn(formsLocators.practiceFormScren);
-        }catch(error){
-            console.error("Is not visible the practice form")
+        }catch(e){
+            console.error("Is not visible the practice form",e)
         }
         
     }
@@ -115,8 +115,4 @@ export class FormsPage extends BasePage{
         }
         
     }
-       
-    
-
-
 }

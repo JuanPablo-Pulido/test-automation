@@ -121,4 +121,23 @@ export class BasePage{
         await this.page.getByText(text, {exact: true}).click();
 
     }
-};
+
+    //Alerts
+
+    async acceptConfirmation(){
+        const dialog= this.page.waitForEvent('dialog').then(async(dialog)=>{
+            await dialog.accept();
+        }) 
+
+    }
+    async dismissConfirmation(){
+        const dialog= this.page.waitForEvent('dialog').then(async(dialog)=>{
+            await dialog.dismiss();
+        });         
+    }
+    async respondToPrompt(response: string) {
+        const dialog= this.page.waitForEvent('dialog').then(async(dialog)=>{
+            await dialog.accept(response)
+        })
+}
+}

@@ -1,0 +1,15 @@
+{
+  "name": "tests-swaglabs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "runner": "cypress"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "cypress": "^14.4.0"
+  }
+}

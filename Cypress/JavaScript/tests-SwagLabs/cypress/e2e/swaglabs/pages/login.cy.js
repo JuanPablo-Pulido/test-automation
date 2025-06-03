@@ -93,4 +93,145 @@ export class LoginPage{
         this.clearUserField();
         this.clearPasswordField();
     }
+
+    async incorrectUser(){
+        this.login("standard_user ","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login(" standard_user","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("standard_user%","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("%standard_user","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+
+        this.login("locked_out_user ","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login(" locked_out_user","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("locked_out_user%","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("%locked_out_user","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+
+        this.login("problem_user ","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login(" problem_user","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("problem_user%","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("%problem_user","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+
+        this.login("performance_glitch_user ","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login(" performance_glitch_user","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("performance_glitch_user%","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("%performance_glitch_user","secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+    }
+
+    async incorrectPassword(){
+        this.login("standard_user","secret_sauce ");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("standard_user"," secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("standard_user","secret_sauce%");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("standard_user","%secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+
+        this.login("locked_out_user"," secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("locked_out_user","secret_sauce ");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("locked_out_user","secret_sauce%");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("locked_out_user","%secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+
+        this.login("problem_user","secret_sauce ");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("problem_user"," secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("problem_user","secret_sauce%");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("problem_user","%secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+
+        this.login("performance_glitch_user","secret_sauce ");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("performance_glitch_user"," secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("performance_glitch_user","secret_sauce%");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+        this.login("performance_glitch_user","%secret_sauce");
+        this.base.validateText(loginLocators.texterror,"Epic sadface: Username and password do not match any user in this service");
+        this.clearUserField();
+        this.clearPasswordField();
+
+    }
 }

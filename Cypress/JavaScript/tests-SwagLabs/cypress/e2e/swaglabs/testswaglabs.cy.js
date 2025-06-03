@@ -76,6 +76,12 @@ describe('Test Suite login screen',()=>{
     })
     it('Log in with incorrect credentials', ()=>{
         login.incorrectCredentials();
-
     })
+    it('Log in with incorrect username', ()=>{
+        login.incorrectUser();
+    })
+    it('Log in with incorrect password', ()=>{
+        login.incorrectPassword();
+    })
+
 })
